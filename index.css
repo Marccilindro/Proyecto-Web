@@ -1,0 +1,228 @@
+/* ESTILO NORD - CONFIGURACIÓN GLOBAL */
+
+body {
+    background-color: #2E3440;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: "Mono", "Consolas", "MS PGothic", sans-serif;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- ANIMACIÓN DE NIEVE --- */
+.snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #D8DEE9 50%, transparent),
+        radial-gradient(1.5px 1.5px at 40px 70px, #E5E9F0 50%, transparent),
+        radial-gradient(1px 1px at 90px 40px, #ECEFF4 50%, transparent);
+    background-size: 200px 200px;
+    animation: snowFall 18s linear infinite;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+.snow::before,
+.snow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 10px 20px, #D8DEE9 50%, transparent),
+        radial-gradient(1.5px 1.5px at 50px 80px, #E5E9F0 50%, transparent);
+    background-size: 300px 300px;
+    animation: snowFallSlow 30s linear infinite;
+    opacity: 0.4;
+}
+
+.snow::after {
+    background-size: 400px 400px;
+    animation-duration: 45s;
+    opacity: 0.25;
+}
+
+@keyframes snowFall {
+    from {
+        transform: translateY(-200px);
+    }
+
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes snowFallSlow {
+    from {
+        transform: translateY(-300px);
+    }
+
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* --- HEADER --- */
+h1 {
+    position: relative;
+    color: #88C0D0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin: 15px 0;
+    z-index: 10;
+    animation: nordGlow 3s ease-in-out infinite;
+}
+
+@keyframes nordGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 6px rgba(136, 192, 208, 0.4), 2px 2px 8px rgba(15, 20, 25, 0.9);
+    }
+
+    50% {
+        text-shadow: 0 0 10px rgba(136, 192, 208, 0.7), 0 0 25px rgba(136, 192, 208, 0.45);
+    }
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Mantiene a los laterales arriba */
+    width: 100%;
+    max-width: 98vw;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    gap: 30px;
+    /* Aumentado el espacio entre bloques */
+    flex: 1;
+}
+
+/* --- BLOQUES (ESTILO COMÚN) --- */
+.info,
+.news,
+.center-block {
+    background-color: #3B4252;
+    color: #D8DEE9;
+    border-radius: 12px;
+    border: 1px solid rgba(136, 192, 208, 0.25);
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(15, 20, 25, 0.7);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/* --- LATERALES --- */
+.info,
+.news {
+    width: 260px;
+    flex-shrink: 0;
+    min-height: 300px;
+    text-align: left;
+    margin-top: 0;
+    /* Asegura que estén arriba del todo */
+}
+
+/* --- BLOQUE CENTRAL --- */
+.center-block {
+    flex-grow: 1;
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    /* Hace que el bloque central esté un poco más bajo que los laterales */
+}
+
+/* --- REDES Y ENLACES --- */
+.redes-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.redes-container img {
+    display: block;
+    height: auto;
+}
+
+.info a {
+    color: #88C0D0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.info a:hover {
+    color: #0faad4;
+    text-decoration: underline;
+}
+
+/* --- IMAGEN DENTRO DEL CENTRAL --- */
+.imagen {
+    margin-top: 25px;
+}
+
+.imagen img {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* --- FOOTER --- */
+footer {
+    width: fit-content;
+    margin: 30px auto 20px;
+    /* Más espacio arriba del footer */
+    padding: 12px 25px;
+    background-color: #3B4252;
+    color: #D8DEE9;
+    border-radius: 12px;
+    border: 1px solid rgba(136, 192, 208, 0.25);
+    font-size: 14px;
+    box-shadow: 0 8px 25px rgba(15, 20, 25, 0.6);
+}
+
+/* --- RESPONSIVIDAD --- */
+@media (max-width: 1100px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .center-block {
+        order: -1;
+        width: 100%;
+        min-width: 100%;
+        margin-top: 0;
+        /* En móviles quitamos el margen extra para aprovechar espacio */
+    }
+
+    .info,
+    .news {
+        width: 48%;
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .info,
+    .news {
+        width: 100%;
+    }
+}
